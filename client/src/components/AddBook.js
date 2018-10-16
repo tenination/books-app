@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { gql } from 'apollo-boost';
 import { graphql } from 'react-apollo';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 
 const getAuthorsQuery = gql`
   {
@@ -13,10 +13,23 @@ const getAuthorsQuery = gql`
 `
 
 class AddBook extends Component {
+  displayAuthors(){
+    let data = this.props.data;
+    if (data.loading) {
+      return (
+        <option>Loading authors...</option>
+      )
+    } else {
+      return data.authors.map((author) =>
+        <option key={author.id} value={author.id}>{author.name}</option>
+      )
+    }
+  }
   render() {
     return (
       <div>
         <Formik
+          initialValues={{ name: '', genre: '', author:'' }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
@@ -24,26 +37,30 @@ class AddBook extends Component {
             }, 400);
           }}
         >
-        {({ isSubmitting }) => (
+        {({ values, handleChange, handleBlur }) => (
           <Form>
-            <div>Book Name:
+            <div id="book-name">Book Name:
               <br />
-              <Field type="text" name="book-name"/>
+              <Field name="name"/>
             </div>
-            <div>Genre:
+            <div id="book-genre">Genre:
               <br />
-              <Field type="text" name="book-genre" />
+              <Field name="genre" />
             </div>
             <div>Author:
               <br />
-              <select name="car">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+              <select
+                id="select-author"
+                name="author"
+                value={values.author}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <option label="Select Author">Select Author</option>
+                {this.displayAuthors()}
               </select>
               <br />
-              <button/>
+              <button id="submit-book" type="submit">Submit</button>
             </div>
           </Form>
         )}

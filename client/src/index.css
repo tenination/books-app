@@ -12,3 +12,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#book-name{
+  margin: 10px 0px
+}
+
+#book-genre{
+  margin: 10px 0px
+}
+
+#select-author{
+  margin: 10px 0px
+}
+
+#submit-book {
+  width: 100px;
+  height: 30px;
+  margin-top:10px;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: lightGrey;
+}
+
+#submit-book:hover {
+  background-color: #c9c9c9;
+  cursor: pointer;
+}
