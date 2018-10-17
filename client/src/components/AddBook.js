@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { Formik, Form, Field } from 'formik';
-import { getAuthorsQuery } from '../queries/queries';
+import { getAuthorsQuery, addBookMutation, getBooksQuery } from '../queries/queries';
 
 class AddBook extends Component {
   displayAuthors(){
-    let data = this.props.data;
+    let data = this.props.getAuthorsQuery;
     if (data.loading) {
       return (
         <option>Loading authors...</option>
@@ -19,6 +19,7 @@ class AddBook extends Component {
   render() {
     return (
       <div>
+        {console.log('this.props:', this.props)}
         <Formik
           initialValues={{ name: '', genre: '', author:'' }}
           onSubmit={(values, { setSubmitting }) => {
@@ -61,4 +62,7 @@ class AddBook extends Component {
   }
 }
 
-export default graphql(getAuthorsQuery)(AddBook);
+export default compose(
+  graphql(addBookMutation, { name: "addBookMutation" }),
+  graphql(getAuthorsQuery,{ name: "getAuthorsQuery" })
+)(AddBook);
