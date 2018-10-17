@@ -13,8 +13,21 @@ code {
     monospace;
 }
 
+#main{
+  width: 60%;
+}
+
 #book-name{
   margin: 10px 0px
+}
+
+#book-details{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  padding: 30px;
 }
 
 #book-genre{
