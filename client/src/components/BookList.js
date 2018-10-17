@@ -16,6 +16,8 @@ class BookList extends Component {
     }
   }
   render() {
+    console.log('rendering BookList component');
+    console.log('this.props');
     return (
       <div>
         <ul id="book-list">

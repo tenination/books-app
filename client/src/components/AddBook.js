@@ -19,6 +19,7 @@ class AddBook extends Component {
   render() {
     return (
       <div>
+        {console.log(this.props)}
         <Formik
           initialValues={{ name: '', genre: '', author:'' }}
           onSubmit={(values, { setSubmitting }) => {
@@ -29,7 +30,8 @@ class AddBook extends Component {
                 name: values.name,
                 genre: values.genre,
                 authorId: values.author
-              }
+              },
+              refetchQueries: [{ query: getBooksQuery }]
             });
             setSubmitting(false);
             }, 400);
