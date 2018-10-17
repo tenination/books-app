@@ -19,7 +19,6 @@ class AddBook extends Component {
   render() {
     return (
       <div>
-        {console.log(this.props)}
         <Formik
           initialValues={{ name: '', genre: '', author:'' }}
           onSubmit={(values, { setSubmitting }) => {
