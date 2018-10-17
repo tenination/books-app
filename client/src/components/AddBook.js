@@ -19,12 +19,18 @@ class AddBook extends Component {
   render() {
     return (
       <div>
-        {console.log('this.props:', this.props)}
         <Formik
           initialValues={{ name: '', genre: '', author:'' }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
+            this.props.addBookMutation({
+              variables: {
+                name: values.name,
+                genre: values.genre,
+                authorId: values.author
+              }
+            });
             setSubmitting(false);
             }, 400);
           }}
@@ -44,7 +50,6 @@ class AddBook extends Component {
               <select
                 id="select-author"
                 name="author"
-                value={values.author}
                 onChange={handleChange}
                 onBlur={handleBlur}
               >
